@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Halo CME Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="holo-glow">Halo CME Detection using Aditya-L1 SWIS-ASPEX Data</h1>
+        <p class="holo-sub">
+            Automated analysis and warning system for identifying potential Halo Coronal Mass Ejections.
+        </p>
+
+        <section id="about" style="margin-bottom: 20px;">
+            <h2>🔭 About the Project</h2>
+            <p>
+                This tool detects <strong>Halo Coronal Mass Ejections (CMEs)</strong> by analyzing particle data from 
+                <strong>Aditya-L1’s SWIS-ASPEX payload</strong>. By identifying sudden spikes in proton and electron flux, 
+                it helps issue <strong>early warnings</strong> for solar storms—supporting <strong>satellite safety</strong>, 
+                <strong>space missions</strong>, and <strong>communication systems</strong>.
+            </p>
+        </section>
+
+        <!-- 🚀 FORM Starts Here -->
+        <section id="upload" class="upload-section">
+            <h2>📂 Upload Data File</h2>
+            <p>Select a SWIS-ASPEX .cdf or .csv file to detect possible Halo CME events.</p>
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="upload-box" onclick="document.getElementById('fileInput').click();">
+                    <p id="fileLabel">🚀 Click to choose file</p>
+                    <input type="file" id="fileInput" name="file" style="display: none;" onchange="updateFileName()" />
+                </div>
+                <button type="submit" class="upload-button">🚀 Launch Analysis</button>
+            </form>
+
+            {% if message %}
+                <div class="result-message">
+                    <p>{{ message }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+
+    <!-- Particle Configuration -->
+    <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
+    <script>
+        function updateFileName() {
+            const input = document.getElementById('fileInput');
+            const label = document.getElementById('fileLabel');
+            if (input.files.length > 0) {
+                label.textContent = `📄 ${input.files[0].name}`;
+            } else {
+                label.textContent = "🚀 Click to choose file";
+            }
+        }
+    </script>
+</body>
+</html>

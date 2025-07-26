@@ -1,0 +1,35 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Halo CME Detection Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Result Content -->
+    <div class="content">
+        <h1>☄️ CME Detection Results</h1>
+
+        <div class="result-box">
+            <p><strong>📁 File Uploaded:</strong> {{ filename }}</p>
+            <p><strong>🔍 Result:</strong> {{ message }}</p>
+            {% if warning %}
+            <p class="warning">🚨 Warning: Potential CME activity detected!</p>
+            {% else %}
+            <p class="safe">✅ No CME activity found.</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('home') }}" class="back-button">⬅️ Back to Upload</a>
+    </div>
+
+    <!-- Particles Config -->
+    <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
+</body>
+</html>
